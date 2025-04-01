@@ -1,10 +1,10 @@
 # Import required libraries
 import os
-import asyncio
 import asyncpg
 from dotenv import load_dotenv
+from models import CREATE_USERS_TABLE
 
-async def main():
+async def connect_db():
     # Load .env file
     load_dotenv()
     
@@ -14,12 +14,16 @@ async def main():
     # Create a connection pool
     pool = await asyncpg.create_pool(connection_string)
     
-    # Acquire a connection from the pool
-    async with pool.acquire() as conn:
-        pass
-        
-    # Close the pool
+    return pool
+    
+async def create_table(pool):
+    # Create the table if it doesn't exist
+    async with pool.acquire() as connection:
+        await connection.execute(CREATE_USERS_TABLE)
+    
+async def close_db(pool):
+    # Close the database connection pool
     await pool.close()
     
-# Run the asynchronous main function
-asyncio.run(main())
+# # Run the asynchronous main function
+# asyncio.run(main())

@@ -18,7 +18,7 @@ async def create_user(pool, name, email, password):
      
 # update user   
 async def update_user(pool, user_id, name, email, password):
-    async with pool.acquires() as conn:
+    async with pool.acquire() as conn:
         return await conn.fetchrow(
             "UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4 RETURNING *",
             name, email, password, user_id

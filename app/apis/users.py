@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
-from db.database import connect_db
-from services.user_service import get_users, get_user_by_id, create_user, update_user, delete_user
+from app.db.database import connect_db
+from app.services.user_service import get_users, get_user_by_id, create_user, update_user, delete_user
 
 router = APIRouter()
 

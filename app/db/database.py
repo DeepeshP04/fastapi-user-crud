@@ -2,7 +2,7 @@
 import os
 import asyncpg
 from dotenv import load_dotenv
-from models import CREATE_USERS_TABLE
+from .models import CREATE_USERS_TABLE
 
 async def connect_db():
     # Load .env file
